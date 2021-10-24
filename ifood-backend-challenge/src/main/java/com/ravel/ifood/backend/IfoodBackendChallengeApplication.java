@@ -1,16 +1,23 @@
 package com.ravel.ifood.backend;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.ravel.ifood.backend.entities.Restaurant;
+import com.ravel.ifood.backend.entities.RestaurantGroup;
 import com.ravel.ifood.backend.repository.RestaurantRepository;
 
 @SpringBootApplication
 public class IfoodBackendChallengeApplication implements CommandLineRunner {
 
+	@Autowired
+	EntityManager manager;
+	
 	RestaurantRepository repository;
 
 	@Autowired
@@ -23,9 +30,21 @@ public class IfoodBackendChallengeApplication implements CommandLineRunner {
 	}
 
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 
-		repository.save(new Restaurant("boladao"));
+		RestaurantGroup rg = new RestaurantGroup();
+		Restaurant restaurant = new Restaurant();
+		
+		restaurant.setName("Good pasta");
+		manager.persist(restaurant);	
+		rg.setNameMenuEntry("Menu delicious");
+		
+		restaurant.setRestaurantGroup(rg);
+		
+		manager.merge(restaurant);
+		
+		manager.close();
 		
 	}
 

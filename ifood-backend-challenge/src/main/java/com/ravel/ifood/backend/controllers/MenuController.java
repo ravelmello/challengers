@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.ravel.ifood.backend.entities.Restaurant;
+import com.ravel.ifood.backend.services.RestaurantGroupService;
 import com.ravel.ifood.backend.services.RestaurantService;
 
 
@@ -18,16 +19,18 @@ import com.ravel.ifood.backend.services.RestaurantService;
 public class MenuController {
 
 
-	private final RestaurantService service;
+	private final RestaurantService restaurantService;
+
 
 	@Autowired
-	private MenuController(RestaurantService service){
-		this.service = service;
-	}
+	private MenuController(RestaurantService restaurantService,
+			RestaurantGroupService restaurantGroupService ){
+		this.restaurantService = restaurantService;
+		}
 
 	@GetMapping(value ="/api/restaurant")
 	public Restaurant getRestaurant(@RequestParam Integer idRestaurant) {
-		Restaurant restaurant = service.recoverRestaurant(idRestaurant);
+		Restaurant restaurant = restaurantService.recoverRestaurant(idRestaurant);
 		Optional.ofNullable(restaurant).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 		return restaurant;
 	}

@@ -22,10 +22,14 @@ public class Restaurant implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Id Integer id;
 	
 	private String name;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idRestaurantGroup", referencedColumnName = "id")
+	private RestaurantGroup restaurantGroup;
 
 	public Restaurant(){}
 
