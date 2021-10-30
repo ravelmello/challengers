@@ -3,6 +3,7 @@ package com.ravel.ifood.backend;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import com.ravel.ifood.backend.entities.Network;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,12 +13,14 @@ import com.ravel.ifood.backend.entities.Restaurant;
 import com.ravel.ifood.backend.entities.RestaurantGroup;
 import com.ravel.ifood.backend.repository.RestaurantRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 public class IfoodBackendChallengeApplication implements CommandLineRunner {
 
 	@Autowired
 	EntityManager manager;
-	
 	RestaurantRepository repository;
 
 	@Autowired
@@ -35,15 +38,14 @@ public class IfoodBackendChallengeApplication implements CommandLineRunner {
 
 		RestaurantGroup rg = new RestaurantGroup();
 		Restaurant restaurant = new Restaurant();
-		
+		Network network = new Network("Ifood");
+		manager.persist(network);
 		restaurant.setName("Good pasta");
-		manager.persist(restaurant);	
+
 		rg.setNameMenuEntry("Menu delicious");
-		
 		restaurant.setRestaurantGroup(rg);
-		
-		manager.merge(restaurant);
-		
+		restaurant.setNetwork(network);
+		manager.persist(restaurant);
 		manager.close();
 		
 	}
