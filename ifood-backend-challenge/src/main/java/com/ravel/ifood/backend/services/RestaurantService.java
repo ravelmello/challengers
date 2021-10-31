@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.ravel.ifood.backend.entities.Restaurant;
 import com.ravel.ifood.backend.repository.RestaurantRepository;
 
+import java.util.List;
+
 @Service
 public class RestaurantService {
 	
@@ -22,4 +24,7 @@ public class RestaurantService {
 		return repository.findRestaurantById(id);
 	}
 
+    public List<Restaurant> getAll() {
+		return repository.findAll();
+    }
 }
