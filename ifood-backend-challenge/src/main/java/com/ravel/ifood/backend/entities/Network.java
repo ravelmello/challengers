@@ -34,6 +34,12 @@ public class Network implements Serializable {
         this.networkName = networkName;
     }
 
+    public Network(int id, String networkName) {
+        this.id = id;
+        this.networkName = networkName;
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
