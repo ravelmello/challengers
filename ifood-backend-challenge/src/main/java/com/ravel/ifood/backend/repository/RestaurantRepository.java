@@ -16,6 +16,7 @@ public interface RestaurantRepository extends CrudRepository<Restaurant, Integer
 	Restaurant save(Restaurant r);
 
 	List<Restaurant> findAll();
-	
+
+	List<Restaurant> findByNetworkId(Integer id);
 
 }

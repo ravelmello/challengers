@@ -3,6 +3,7 @@ package com.ravel.ifood.backend.entities;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Fetch;
+import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,7 +38,6 @@ public class Network implements Serializable {
     public Network(int id, String networkName) {
         this.id = id;
         this.networkName = networkName;
-
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.ravel.ifood.backend.models;
 
 
 import com.ravel.ifood.backend.entities.Network;
+import com.ravel.ifood.backend.entities.Restaurant;
 import com.ravel.ifood.backend.repository.NetworkRepository;
 import com.ravel.ifood.backend.services.NetworkService;
 import org.junit.Before;
@@ -19,6 +20,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class NetworkTest {
 
     Network network = new Network(1, "ifood");
+  //  Restaurant restaurant1 = new Restaurant("Bom a bessa", null, network);
+ //   Restaurant restaurant2 = new Restaurant("Bom demais", null, network);
+
 
     @TestConfiguration
     static class NetworkServiceConf {
@@ -36,15 +40,19 @@ public class NetworkTest {
 
     @Before
     public void setup(){
-
         Mockito.when(networkRepository.findByNetworkName(network.getNetworkName())).thenReturn(network);
     }
+
 
     @Test
     public void verifyIfExistsNetwork(){
         String name = network.getNetworkName();
         Network networkTest = networkService.recoveryByName(name);
         Assertions.assertEquals(name, networkTest.getNetworkName());
+    }
+
+    public void verifyTheListOfRestaurants(){
+
     }
 
 }

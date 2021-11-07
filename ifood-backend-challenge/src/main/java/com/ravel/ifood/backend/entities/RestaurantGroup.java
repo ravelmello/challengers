@@ -10,9 +10,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "i_restaurant_group")
 public class RestaurantGroup {
 
@@ -21,6 +26,10 @@ public class RestaurantGroup {
 	private Integer id;
 	
 	private String nameMenuEntry;
+
+	@OneToOne
+	@JoinColumn(name = "item_group_id")
+	private ItemGroup itemGroup;
 	
 	
 }

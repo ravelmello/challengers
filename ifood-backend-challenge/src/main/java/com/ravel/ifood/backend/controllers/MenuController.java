@@ -27,22 +27,6 @@ public class MenuController {
 		this.restaurantService = restaurantService;
 		}
 
-	@GetMapping(value ="/api/restaurant")
-	@ResponseBody
-	public Restaurant getRestaurant(@RequestParam Integer idRestaurant) {
-		Restaurant restaurant = restaurantService.recoverRestaurant(idRestaurant);
-		Optional.ofNullable(restaurant).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-		return restaurant;
-	}
-
-	@GetMapping(value = "/api/restaurant/list")
-	@ResponseBody
-	public List<Restaurant> getAll(){
-		List<Restaurant> restaurants = restaurantService.getAll();
-		Optional.ofNullable(restaurants).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-		return restaurants;
-	}
-	
 
 
 }

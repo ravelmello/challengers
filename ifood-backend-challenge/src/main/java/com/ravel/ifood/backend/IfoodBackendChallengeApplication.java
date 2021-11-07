@@ -3,14 +3,12 @@ package com.ravel.ifood.backend;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import com.ravel.ifood.backend.entities.Network;
+import com.ravel.ifood.backend.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.ravel.ifood.backend.entities.Restaurant;
-import com.ravel.ifood.backend.entities.RestaurantGroup;
 import com.ravel.ifood.backend.repository.RestaurantRepository;
 
 import java.util.ArrayList;
@@ -36,15 +34,33 @@ public class IfoodBackendChallengeApplication implements CommandLineRunner {
 	@Transactional
 	public void run(String... args) throws Exception {
 
-		RestaurantGroup rg = new RestaurantGroup();
-		Restaurant restaurant = new Restaurant();
 		Network network = new Network("Ifood");
-		manager.persist(network);
-		restaurant.setName("Good pasta");
+		Restaurant restaurant = new Restaurant();
+		RestaurantGroup rg = new RestaurantGroup();
 
-		rg.setNameMenuEntry("Menu delicious");
+		ItemGroup itemGroup = new ItemGroup();
+		OptionGroup op = new OptionGroup();
+
+		//persist network
+		manager.persist(network);
+
+		// setting the restaurant
+		restaurant.setName("083 Burger");
+		rg.setNameMenuEntry("Hamburgers");
 		restaurant.setRestaurantGroup(rg);
 		restaurant.setNetwork(network);
+
+		//setting the item group
+		itemGroup.setItemGroupName("Cabra da Peste");
+		itemGroup.setRestaurantGroup(rg);
+
+		op.setRestaurant(restaurant);
+		op.setObrigatory(false);
+
+
+		rg.setItemGroup(itemGroup);
+		manager.persist(itemGroup);
+		manager.persist(op);
 		manager.persist(restaurant);
 		manager.close();
 		

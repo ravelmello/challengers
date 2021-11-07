@@ -41,6 +41,12 @@ public class Restaurant implements Serializable{
 		this.name = name;
 	}
 
+	public Restaurant(String name, RestaurantGroup restaurantGroup, Network network){
+		this.name = name;
+		this.restaurantGroup = restaurantGroup;
+		this.network = network;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
